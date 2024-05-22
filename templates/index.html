@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Emotion Music Recommendation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Bigelow+Rules&display=swap" rel="stylesheet">
+  <link href="../static/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+
+  <div id="body">
+    <nav class="navbar fixed-top">
+      <div class="navbar-brand">
+        <img src="https://i.ibb.co/LYJ6g2p/One-of-a-kind.png" alt="logo" class="logo" />
+        <a href="#home" class="color-value">EMUSE</a>
+      </div>
+      <ul class="navbar-menu">
+        <li><a href="#home">HOME</a></li>
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#services">SERVICES</a></li>
+        <li><a href="#contact">CONTACT</a></li>
+      </ul>
+      <div class="navbar-toggle">&#9776;</div>
+    </nav>
+    <hr class="border"/>
+    <div class="back-image">
+      <section id="home" class="section1">
+        <div class="d-flex flex-row justify-content-center">
+          <div class="mt-25 mr-70 main-home-para">
+            <p class="section-header p-3 pl-7 text-center"> EMUSE</p>
+          </div>
+          <div>
+            <p class="margin text-justify justification">
+              Feel the Music, We Hear Your Emotions<br />
+              EMUSE curates music based on your emotions.
+              Powered by facial and speech recognition,
+              we recommend songs that perfectly match your mood.
+              Discover new favorites and personalize
+              your soundtrack for life's moments.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="about" class="section">
+        <div class="d-flex flex-row justify-content-center">
+          <p class="main-home-para">
+            Passion for Music, Driven by Innovation
+
+            EMUSE is an emotion-driven music recommendation system,
+            currently in development by a group of music enthusiasts at
+            Vallurupalli Nageshwara Rao Vignana Jyothi Institute of Engineering and Technology.
+            We're a team of students in CSE-Artificial Intelligence and Data Science
+            who share a love for music and a fascination with how technology can enhance our experiences.<br />
+
+            The EMUSE Story: A College Project with Big Dreams<br />
+            We wanted to create a bridge between music and emotions using the power of AI.
+            We believe music should be a reflection of how you feel, and
+            EMUSE aims to personalize your soundtrack for life's moments. <br /><br />
+
+            <div class="centering">
+              <p class="section-header">ABOUT US</p>
+            </div>
+          </div>
+          <div class="d-flex flex-row justify-content-center">
+            <div class="main-home-para margin">
+              <span class="section-header teal centering">The Team</span><br />
+            </div>
+            <div class="main-home-para margin mr-3">
+              <ul class="list">
+                <li>Hema Sree Vemulamada</li>
+                <li>Swetha Lakkavathula</li>
+                <li>Roshini Reddy Arramreddy</li>
+              </ul>
+              Join Us on the Journey
+
+              EMUSE is still under development,
+              but we're thrilled to share our progress with you.
+              We're constantly learning, refining our technology
+              and striving to make EMUSE the ultimate emotional
+              music companion.
+              <br /><br />
+
+              <span class="sub-heading teal">The Future of EMUSE</span><br />
+
+              We envision EMUSE expanding beyond web application,
+              potentially integrating with wearable technology
+              for an even more seamless experience.<br />
+              We're excited to see where EMUSE takes us!
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="services" class="section">
+        <p class="section-header">Services</p>
+        <div class="container">
+          <div class="left">
+            <h2 style="font-family: 'sans-serif'; font-size: 30px; color: #1DB954; text-align: center;">Emotion Detector</h2>
+            <div class="video-container">
+              <img class="outer-shadow" id="bg" class="center img-fluid" src="{{ url_for('video_feed') }}">
+            </div>
+          </div>
+          
+          <div class="right">
+            <h2 style="font-family: 'sans-serif'; font-size: 30px; color: #1DB954; text-align: center;">Song Recommendations</h2>
+            <div class="recommendation-table-container">
+              <div class="outer-shadow" id="ResultArea"></div>
+            </div>
+          </div>
+          
+        </div>
+        <div class="btncontainer">
+          <button class="refresh" id="refreshButton">Refresh</button>
+          <button class="button" id="stopButton">Detect</button>
+        </div>
+      </section>
+    </div>
+    <section id="contact" class="section">
+      <hr style="border: 1px solid #ffffff">
+      <p class="section-header text-center">Contact Us</p>
+      <div class="d-flex flex-row justify-content-center">
+        <p class="main-home-para">
+          We value your feedback! If you have any questions,
+          suggestions, or just want to chat about music,
+          feel free to reach out to us through the following form:
+          <a href="https://forms.gle/8FG2ePj3mXuFn6XBA" target="_blank" class="teal">Feed us Back with your Feedback</a>
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    let stopButtonClicked = false;
+
+    // Function to handle detect button click
+    $(".button").on("click", function () {
+      stopEmotionDetection();
+    });
+
+    // Function to handle refresh button click
+    $(".refresh").on("click", function () {
+      refreshPage();
+    });
+
+    // Function to stop emotion detection
+    function stopEmotionDetection() {
+      $.ajax({
+        type: "GET",
+        url: "/stop_emotion_detection",
+        success: function (response) {
+          stopButtonClicked = true;
+          console.log("Emotion detection stopped successfully.");
+          updateVideoFeed();
+        },
+        error: function (error) {
+          console.log("Error stopping emotion detection:", error);
+        },
+      });
+    }
+
+    // Function to start emotion detection
+    function startEmotionDetection() {
+      $.ajax({
+        type: "GET",
+        url: "/start_emotion_detection",
+        success: function (response) {
+          stopButtonClicked = false;
+          console.log("Emotion detection started successfully.");
+          updateVideoFeed(); // Ensure the video feed updates and shows the emotion tag
+        },
+        error: function (error) {
+          console.log("Error starting emotion detection:", error);
+        },
+      });
+    }
+
+    // Function to periodically update the table
+    setInterval(function () {
+      if (!stopButtonClicked) {
+        $.getJSON("/t", function (data) {
+          createHtmlTable(data);
+        });
+      }
+    }, 1000);
+
+    // Function to create HTML table from data
+    function createHtmlTable(data) {
+      $("#ResultArea").html("");
+      var table = $("<table class='table table-striped table-light table-bordered table-hover table-sm table-responsive' id='DynamicTable'></table>").appendTo("#ResultArea");
+      var rowHeader = $("<tr></tr>").appendTo(table);
+      $("<td></td>").text("Name").appendTo(rowHeader);
+      $("<td></td>").text("Album").appendTo(rowHeader);
+      $("<td></td>").text("Artist").appendTo(rowHeader);
+      $("<td></td>").text("Spotify Link").appendTo(rowHeader);
+      $.each(data, function (i, value) {
+        var row = $("<tr></tr>").appendTo(table);
+        $("<td></td>").text(value.Name).appendTo(row);
+        $("<td></td>").text(value.Album).appendTo(row);
+        $("<td></td>").text(value.Artist).appendTo(row);
+        $("<td></td>")
+          .html('<a href="' + value["Spotify Link"] + '" target="_blank">' + value["Spotify Link"] + "</a>")
+          .appendTo(row);
+      });
+    }
+
+    // Function to refresh the page
+    function refreshPage() {
+      setTimeout(function () {
+        $("#ResultArea").html(""); // Clear results
+        startEmotionDetection();
+      }, 200); 
+    }
+
+    // Function to update video feed
+    function updateVideoFeed() {
+      $("#bg").attr("src", "/video_feed?" + new Date().getTime()); // Ensure the video feed updates
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggleButton = document.querySelector(".navbar-toggle");
+      const menu = document.querySelector(".navbar-menu");
+      const menuLinks = document.querySelectorAll(".navbar-menu a");
+      toggleButton.addEventListener("click", function () {
+        menu.classList.toggle("active");
+      });
+      menuLinks.forEach((link) => {
+        link.addEventListener("click", function () {
+          menu.classList.remove("active");
+        });
+      });
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

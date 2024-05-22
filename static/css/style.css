@@ -1,0 +1,277 @@
+.outer-shadow {
+  --outer-shadow: 3px 3px 3px #d0d0d0, -3px -3px 3px #f8f8f8;
+}
+
+.inner-shadow {
+  --inner-shadow: inset 3px 3px 3px #d0d0d0, inset -3px -3px 3px #f8f8f8;
+}
+@import url("https://fonts.googleapis.com/css2?family=Bree+Serif&family=Caveat:wght@400;700&family=Lobster&family=Monoton&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display+SC:ital,wght@0,400;0,700;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,700&family=Work+Sans:ital,wght@0,400;0,700;1,700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Bree Serif";
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: url("static\BackgroundImage.jpg");
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.left,
+.right {
+  flex: 1;
+  padding: 20px;
+}
+
+.left {
+  margin-right: 20px;
+}
+
+.right {
+  margin-left: 20px;
+}
+.btncontainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.video-container {
+  margin-bottom: 20px;
+  width: 50px;
+  height: 50px;
+}
+
+#bg {
+  width: 500px;
+  height: 400px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.refresh {
+  background-color: #003779;
+  color: #ffffff;
+  margin-right: 10px;
+}
+
+.button {
+  background-color: #f21e1e;
+  color: #ffffff;
+  margin-top: auto;
+  align-self: flex-end;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid #ffffff;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .left,
+  .right {
+    padding: 10px;
+  }
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1db954;
+  padding: 10px 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  font-family: "Monospace";
+  position: fixed;
+  top: 0;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.color-value {
+  color: #1db954;
+}
+
+.logo {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.navbar-brand a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navbar-menu {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+
+.navbar-menu li a {
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 8px 12px;
+  transition: background-color 0.3s;
+}
+
+.navbar-menu li a:hover {
+  background-color: #1db954;
+  border-radius: 4px;
+}
+
+.navbar-toggle {
+  display: none;
+  cursor: pointer;
+  color: #fff;
+  font-size: 24px;
+}
+
+@media (max-width: 768px) {
+  .navbar-menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .navbar-menu.active {
+    display: flex;
+  }
+
+  .navbar-menu li {
+    text-align: center;
+  }
+
+  .navbar-toggle {
+    display: block;
+  }
+}
+
+.section {
+  padding: 20px;
+}
+
+#home {
+  background-color: #121212;
+}
+
+#about {
+  background-color: #121212;
+}
+
+#services {
+  background-color: #121212;
+}
+
+#contact {
+  background-color: #121212;
+}
+
+.section-header {
+  color: #1db954;
+  font-size: 50px;
+  font-weight: bold;
+  font-family: "Bree Serif";
+}
+
+.border {
+  color: white;
+  width: 2px;
+  margin: 3px;
+}
+.sub-heading {
+  color: #b3b3b3;
+}
+
+.teal {
+  color: #17a2b8;
+}
+.section1 {
+  padding: 80px 20px;
+  margin-top: 20px;
+}
+.list {
+  padding-left: 20px;
+  list-style-type: circle;
+}
+.main-home-para {
+  text-align: justify;
+  margin: 10px;
+  padding: 5px;
+  width: 50%;
+}
+
+.centering {
+  text-align: center;
+  padding: 50px;
+  margin: 20px;
+}
+.margin {
+  margin: 40px;
+}
+.recommendation-table-container {
+  width: 100%;
+  max-width: 500px; /* Adjust as needed */
+  height: 400px;
+  margin: auto;
+  overflow-x: auto; /* Add horizontal scroll if needed */
+  overflow-y: auto;
+}
+
+#ResultArea table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#ResultArea th,
+#ResultArea td {
+  padding: 2px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px; /* Adjust font size as needed */
+}
+
+#ResultArea th {
+  background-color: #f2f2f2;
+}
+
+.justification {
+  text-align: justify;
+}
