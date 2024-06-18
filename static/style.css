@@ -365,7 +365,7 @@ nav {
 }
 
 .card-context p {
-  text-align: center;
+  text-align: justify;
 }
 
 .heading-hover {
@@ -381,7 +381,8 @@ nav {
   background-color: var(--bg-color);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+  padding: 30px;
 }
 
 .title {
@@ -404,4 +405,86 @@ nav {
 
 .links a:hover {
   color: var(--main-color);
+}
+
+.contact-us {
+  margin-left: 300px;
+}
+
+.contact {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.send {
+  background-color: #ff204e; /* Green background */
+  color: white; /* White text */
+  padding: 10px 20px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.ContactUs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.feedback-container {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.feedback-container h2 {
+  color: #16213e; /* Gold color */
+  font-weight: bolder;
+}
+
+.feedback-container p {
+  margin: 10px 0;
+}
+
+.input-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.feedback-textarea {
+  height: 100px;
+}
+
+.rating span {
+  font-size: 24px;
+  color: #16213e; /* Gold color */
+  cursor: pointer;
 }
