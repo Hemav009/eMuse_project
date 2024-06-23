@@ -242,25 +242,8 @@
       </div>
     </footer>
 
-    <script>
-      document
-        .getElementById("feedbackForm")
-        .addEventListener("submit", function (event) {
-          var name = document.getElementById("name").value.trim();
-          var email = document.getElementById("email").value.trim();
-          var feedback = document.getElementById("feedback").value.trim();
-
-          if (name === "" || email === "" || feedback === "") {
-            alert("Please fill in all fields before submitting the form.");
-            event.preventDefault();
-          }
-        });
-
-      // Function to update video feed
-      function updateVideoFeed() {
-        $("#bg").attr("src", "/video_feed?" + new Date().getTime()); // Ensure the video feed updates
-      }
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
       let stopButtonClicked = false;
 
       // Function to handle detect button click
@@ -350,7 +333,23 @@
         }, 200);
       }
 
+      // Function to update video feed
+      function updateVideoFeed() {
+        $("#bg").attr("src", "/video_feed?" + new Date().getTime()); // Ensure the video feed updates
+      }
+
       document.addEventListener("DOMContentLoaded", function () {
+        const toggleButton = document.querySelector(".navbar-toggle");
+        const menu = document.querySelector(".navbar-menu");
+        const menuLinks = document.querySelectorAll(".navbar-menu a");
+        toggleButton.addEventListener("click", function () {
+          menu.classList.toggle("active");
+        });
+        menuLinks.forEach((link) => {
+          link.addEventListener("click", function () {
+            menu.classList.remove("active");
+          });
+        });
         document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
           anchor.addEventListener("click", function (e) {
             e.preventDefault();
