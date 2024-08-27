@@ -488,3 +488,9 @@ nav {
   color: #16213e; /* Gold color */
   cursor: pointer;
 }
+
+.recording-controls {
+  display: flex;
+
+  margin-right: 100px;
+}

@@ -1,21 +1,23 @@
-
 from flask import jsonify
+import librosa
 import numpy as np
 import cv2
 from PIL import Image
 from tensorflow.keras.models import Sequential # type: ignore
 from tensorflow.keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPooling2D # type: ignore
-from tensorflow.keras.preprocessing import image # type: ignore
 import pandas as pd
 from threading import Thread
 import datetime
+import speech_recognition as sr
+from io import BytesIO
+import os
+from sklearn.preprocessing import StandardScaler
 
-import cv2
+# Define a global variable to store the model
+global model
 
 # Initialize face cascade classifier
 face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
-
-
 
 emotion_model = Sequential()
 emotion_model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=(48,48,1)))
@@ -133,3 +135,73 @@ def stop_emotion_detection():
     global stop_emotion_detection_flag
     stop_emotion_detection_flag = True
     return jsonify({'message': 'Emotion detection stopped successfully.'})
+
+# Initialize recognizer
+recognizer = sr.Recognizer()
+
+def recognize_speech(audio_data):
+    try:
+        audio_file = BytesIO(audio_data)
+        with sr.AudioFile(audio_file) as source:
+            audio = recognizer.record(source)
+            text = recognizer.recognize_google(audio)
+            return text
+    except Exception as e:
+        return str(e)
+
+def extract_feature(file_name, mfcc=True, chroma=True, mel=True):
+    with sound_file.SoundFile(file_name) as sound_file:
+        X = sound_file.read(dtype="float32")
+        sample_rate = sound_file.samplerate
+        
+        if chroma:
+            stft = np.abs(librosa.stft(X))
+        
+        result = np.array([])
+        
+        if mfcc:
+            mfccs = np.mean(librosa.feature.mfcc(y=X, sr=sample_rate, n_mfcc=40).T, axis=0)
+            result = np.hstack((result, mfccs))
+        
+        if chroma:
+            chroma = np.mean(librosa.feature.chroma_stft(S=stft, sr=sample_rate).T, axis=0)
+            result = np.hstack((result, chroma))
+        
+        if mel:
+            mel_spectrogram = librosa.feature.melspectrogram(y=X, sr=sample_rate)
+            mel = np.mean(mel_spectrogram.T, axis=0)
+            result = np.hstack((result, mel))
+        
+        return result
+
+def process_audio(audio_file):
+    # Save the uploaded file
+    file_path = "temp_audio.wav"
+    audio_file.save(file_path)
+    
+    # Extract features from the audio file
+    features = extract_feature(file_path)
+    
+    # Predict the emotion
+    emotion = model.predict([features])
+    
+    # Map the emotion to a label
+    emotion_label = emotion.get(emotion[0], "Unknown")
+    
+    # Clean up temporary file
+    os.remove(file_path)
+    
+    return emotion_label
+
+def save_audio_file(audio_file):
+    # Save the audio file to disk
+    audio_path = os.path.join("audio_storage", "recorded_audio.wav")
+    audio_file.save(audio_path)
+
+def replay_audio_file():
+    # Replay the saved audio file
+    audio_path = os.path.join("audio_storage", "recorded_audio.wav")
+    with open(audio_path, "rb") as f:
+        audio_data = f.read()
+    return audio_data
+
