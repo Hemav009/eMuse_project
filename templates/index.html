@@ -206,6 +206,10 @@
           </div>
         </div>
       </div>
+      <div class="btncontainer">
+        <button class="refresh" id="refreshButton">Refresh</button>
+        <button class="button" id="stopButton">Detect</button>
+      </div>
     </section>
 
     <h1 style="color: #16213e; margin-left: 10px; font-weight: 900px">
@@ -273,15 +277,17 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
       let recordedBlob;
-      let stopButtonClicked = false;
       let mediaRecorder;
       let audioChunks = [];
+
+      let stopButtonClicked = false;
 
       // Function to handle detect button click
       $(".button").on("click", function () {
         stopEmotionDetection();
       });
 
+      // Function to handle refresh button click
       $(".refresh").on("click", function () {
         refreshPage();
       });
@@ -310,7 +316,7 @@
           success: function (response) {
             stopButtonClicked = false;
             console.log("Emotion detection started successfully.");
-            updateVideoFeed();
+            updateVideoFeed(); // Ensure the video feed updates and shows the emotion tag
           },
           error: function (error) {
             console.log("Error starting emotion detection:", error);
@@ -318,6 +324,7 @@
         });
       }
 
+      // Function to periodically update the table
       setInterval(function () {
         if (!stopButtonClicked) {
           $.getJSON("/t", function (data) {
@@ -326,6 +333,7 @@
         }
       }, 1000);
 
+      // Function to create HTML table from data
       function createHtmlTable(data) {
         $("#ResultArea").html("");
         var table = $(
@@ -353,15 +361,17 @@
         });
       }
 
+      // Function to refresh the page
       function refreshPage() {
         setTimeout(function () {
-          $("#ResultArea").html("");
+          $("#ResultArea").html(""); // Clear results
           startEmotionDetection();
         }, 200);
       }
 
+      // Function to update video feed
       function updateVideoFeed() {
-        $("#bg").attr("src", "/video_feed?" + new Date().getTime());
+        $("#bg").attr("src", "/video_feed?" + new Date().getTime()); // Ensure the video feed updates
       }
 
       // Start recording
