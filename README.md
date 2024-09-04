@@ -70,3 +70,7 @@ Instead of CSVs, create a database and connect it to the application. The DB wil
 Add a feature that will update specified playlists for better and more recent recommendations, a specific day over a fixed duration say every Sunday, and append it to the database
 Directly play the song.
 "# eMuse"
+
+# OUTPUT
+
+
