@@ -27,11 +27,11 @@ Run python app.py and give camera permission if asked.
 
 # Tech Stack
 
-Keras
-Tensorflow
-Spotify
-Tkinter (For testing)
-Flask
+1. Keras
+2. Tensorflow
+3. Spotify API
+4. Flask
+5. Front End
 
 # Dataset
 
