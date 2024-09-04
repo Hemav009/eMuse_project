@@ -49,18 +49,13 @@ The model architecture is a sequential model consisting of Conv2d, Maxpool2d, Dr
 # Image Processing and Training
 
 The images were normalized, resized to (48,48) and converted to grayscale in batches of 64 with the help of 'ImageDataGenerator' in Keras API.
-Training took around 13 hours locally for 75 epochs with an accuracy of ~66 %
-
-# Current Condition
-
-The entire project works perfectly fine. Live detection gives good frame rates due to multithreading.
+Training took around 6 hours locally for 75 epochs with an accuracy of ~70 %
 
 # Project Components
 
 Spotipy is a module for establishing a connection to and getting tracks from Spotify using the Spotipy wrapper.
 haar cascade is for face detection.
-camera.py is the module for video streaming, frame capturing, prediction, and recommendation which are passed to main.py.
-main.py is the main flask application file.
+app.py is the main flask application file.
 index.html in the 'templates' directory is the web page for the application. Basic HTML and CSS.
 train.py is the script for image processing and training the model.
 
