@@ -73,4 +73,25 @@ Directly play the song.
 
 # OUTPUT
 
+![Screenshot 2024-05-22 174826](https://github.com/user-attachments/assets/db884569-17ff-4a63-a4f3-9904d9bba4c5)
+
+
+![Screenshot 2024-05-22 174848](https://github.com/user-attachments/assets/f1a126e3-2cc8-4095-a841-a0a0c706e157)
+
+
+![Screenshot 2024-05-22 174856](https://github.com/user-attachments/assets/d1f79ab7-5060-4b9a-ac17-f952dade7e8f)
+
+
+![Screenshot 2024-05-22 174917](https://github.com/user-attachments/assets/0693f8e5-df53-4f7b-81e9-da047fd70107)
+
+
+
+![Screenshot 2024-05-22 174933](https://github.com/user-attachments/assets/afa51715-7526-4854-a804-30a6d3b85bc8)
+
+
+
+
+
+
+
 
